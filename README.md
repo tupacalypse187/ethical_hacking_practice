@@ -1,1 +1,1 @@
-# udemy_ethical_hacking
+# ethical_hacking_practice

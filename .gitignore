@@ -1,3 +1,4 @@
 .udemy_venv/
 .vscode/
 .py_*/
+.idea/*
