@@ -1,4 +1,5 @@
-import re, os
+import os
+import re
 from collections import Counter
 
 # phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
@@ -20,7 +21,8 @@ Harry Potter
 """
 
 phoneNumRE = re.compile(r"\d{3}-\d{3}-\d{4}")
-IpRE = re.compile(r"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}).*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5})", re.M)
+IpRE = re.compile(r"^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5}).*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}):(\d{1,5})",
+                  re.M)
 
 mo = phoneNumRegex.search(searchString)
 print(f"Phone number found: {mo.group()}")
@@ -43,11 +45,11 @@ with open('./regex_file.txt', 'r') as f:
 
 results = phoneNumRE.findall(someText)
 c = Counter(results)
-print({k:v for (k,v) in c.items() if v > 1})
+print({k: v for (k, v) in c.items() if v > 1})
 
 resultsIP = IpRE.findall(someText)
 cIP = Counter(resultsIP)
-print({k:v for (k,v) in cIP.items() if v > 1})
+print({k: v for (k, v) in cIP.items() if v > 1})
 
 srcResults = []
 dstResults = []
@@ -58,6 +60,5 @@ sIP = Counter(srcResults)
 print(sIP)
 dIP = Counter(dstResults)
 print(dIP)
-print({k:v for (k,v) in sIP.items() if v > 1})
-print({k:v for (k,v) in dIP.items() if v > 1})
-
+print({k: v for (k, v) in sIP.items() if v > 1})
+print({k: v for (k, v) in dIP.items() if v > 1})
